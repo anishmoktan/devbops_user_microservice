@@ -4,8 +4,6 @@ import json
 from datetime import date, datetime
 from devbops_user_microservice import app
 
-
-
 class BasicTestCase(unittest.TestCase):
 
     def setUp(self):
@@ -46,24 +44,32 @@ class BasicTestCase(unittest.TestCase):
 
     def test_3_update_info(self):
 
-        req
+        req = {
+            "Username" = "QA_Tester_Dec",
+            "Firstname" = "New_first_name",
+            "Lastname" = "New_last_name",
+            "Currentcity" = "New_city",
+            "Currentcountry" = "New_city",
+            "Password" = "New_password",
+            "Email" = "New_email"
+        }
+
+        rv = self.app.post('/update-user-info', json=req)
+        data = json.loads(rv.data)
+        assert data['Result'] == True
 
 
     def test_4_delete(self):
 
         req = {
-
-
-
-
+            "Username" = "QA_Tester_Dec"
         }
 
+        rv = self.app.post('/delete', json=req)
+        data = json.loads(rv.data)
+        assert data['Result'] == True
+
     
-    
-
-
-
-
     # def test_login_route(self):
     #     with app.test_client() as c:
     #         response = c.get('/login')
