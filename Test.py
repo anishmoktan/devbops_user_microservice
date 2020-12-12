@@ -16,14 +16,14 @@ class BasicTestCase(unittest.TestCase):
 
     def test_1_signup(self):
         req = {
-            "Action" : "register",
-            "Username": "QA_Tester_Dec",
-            "Password": "password12345678",
-            "Email": "QA@gmail.com",
-            "FirstName": "Quality",
-            "LastName": "Assurance",
-            "Country": "USA",
-            "City": "New York City"
+            "Action":"register",
+            "Username":"QA_Tester_Dec",
+            "Password":"password12345678",
+            "Email":"QA@gmail.com",
+            "FirstName":"Quality",
+            "LastName":"Assurance",
+            "Country":"USA",
+            "City":"New York City"
         }
 
         rv = self.app.post('/register', json=req)
@@ -34,8 +34,8 @@ class BasicTestCase(unittest.TestCase):
     def test_2_login(self):
 
         req = {
-            "Username": "QA_Tester_Dec",
-            "Password": "password12345678"
+            "Username":"QA_Tester_Dec",
+            "Password":"password12345678"
         }
         rv = self.app.post('/login', json=req)
         data = json.loads(rv.data)
@@ -45,13 +45,13 @@ class BasicTestCase(unittest.TestCase):
     def test_3_update_info(self):
 
         req = {
-            "Username" = "QA_Tester_Dec",
-            "Firstname" = "New_first_name",
-            "Lastname" = "New_last_name",
-            "Currentcity" = "New_city",
-            "Currentcountry" = "New_city",
-            "Password" = "New_password",
-            "Email" = "New_email"
+            "Username":"QA_Tester_Dec",
+            "Firstname":"New_first_name",
+            "Lastname":"New_last_name",
+            "Currentcity":"New_city",
+            "Currentcountry":"New_city",
+            "Password":"New_password",
+            "Email":"New_email"
         }
 
         rv = self.app.post('/update-user-info', json=req)
@@ -62,7 +62,7 @@ class BasicTestCase(unittest.TestCase):
     def test_4_delete(self):
 
         req = {
-            "Username" = "QA_Tester_Dec"
+            "Username":"QA_Tester_Dec"
         }
 
         rv = self.app.post('/delete', json=req)
