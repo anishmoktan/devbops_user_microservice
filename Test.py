@@ -46,10 +46,10 @@ class BasicTestCase(unittest.TestCase):
 
         req = {
             "Username":"QA_Tester_Dec",
-            "Firstname":"New_first_name",
-            "Lastname":"New_last_name",
-            "Currentcity":"New_city",
-            "Currentcountry":"New_city",
+            "FirstName":"New_first_name",
+            "LastName":"New_last_name",
+            "City":"New_city",
+            "Country":"New_city",
             "Password":"New_password",
             "Email":"New_email"
         }
