@@ -69,12 +69,6 @@ class BasicTestCase(unittest.TestCase):
         data = json.loads(rv.data)
         assert data['Result'] == True
 
-    
-    # def test_login_route(self):
-    #     with app.test_client() as c:
-    #         response = c.get('/login')
-    #         self.assertEquals(response.status_code, 200)
-            
     # def test_index(self):
     #     tester = app.test_client(self)
     #     response = tester.get('/', content_type='html/text')
