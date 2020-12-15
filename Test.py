@@ -69,10 +69,12 @@ class BasicTestCase(unittest.TestCase):
         data = json.loads(rv.data)
         assert data['Result'] == True
 
-    # def test_index(self):
+    # def test_5_index(self):
     #     tester = app.test_client(self)
     #     response = tester.get('/', content_type='html/text')
     #     self.assertEqual(response.status_code, 302)
+
+    
     
     
 if __name__ == '__main__':
