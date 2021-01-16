@@ -35,7 +35,7 @@ RUN a2ensite user.conf
 RUN ln -sf /proc/self/fd/1 /var/log/apache2/access.log && \
     ln -sf /proc/self/fd/1 /var/log/apache2/error.log
 
-EXPOSE 90
+EXPOSE 80
 WORKDIR /var/www/devbops_user_microservice
 
 CMD  /usr/sbin/apache2ctl -D FOREGROUND
