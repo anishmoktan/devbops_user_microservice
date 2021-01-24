@@ -20,6 +20,9 @@ COPY ./user.conf /etc/apache2/sites-available/user.conf
 RUN a2ensite user 
 RUN a2enmod headers
 
+# added Test.py
+COPY ./Test.py /var/www/devbops_user_microservice/Test.py
+
 # wsgi config file Mod_wsgi
 COPY ./user.wsgi /var/www/devbops_user_microservice/user.wsgi
 
