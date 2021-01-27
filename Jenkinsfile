@@ -27,16 +27,7 @@ pipeline {
              }
          }
          stage('build-image'){
-             steps{
-                 script{
-
-                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                     echo 'building image...'
-
-                 }
-        
-
-             }
+            sh 'docker build -t lmtd/devbops_event .'
 
          }
 
