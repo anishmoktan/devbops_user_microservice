@@ -27,7 +27,11 @@ pipeline {
              }
          }
          stage('build-image'){
-            sh 'docker build -t lmtd/devbops_event .'
+             steps{
+                 sh 'docker build -t lmtd/devbops_event .'
+
+             }
+            
 
          }
 
