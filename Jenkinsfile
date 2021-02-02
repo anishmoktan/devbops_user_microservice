@@ -1,7 +1,7 @@
 node{
     
     stage('GitHub Checkout'){
-        git branch: 'main', credentialsId: 'git-creds', url: 'https://github.com/anishmoktan/devbops_user_microservice'
+        git branch: 'master', credentialsId: 'git-creds', url: 'https://github.com/anishmoktan/devbops_user_microservice'
     }
     
     stage('DevBops User Test'){
