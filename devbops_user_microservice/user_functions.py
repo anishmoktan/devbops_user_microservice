@@ -26,36 +26,41 @@ class Users:
                 self.columns[3]: firstname,
                 self.columns[4]: lastname,
                 self.columns[5]: self.hash_pw(password)
-
             }
         )
 
-        # print(response["ResponseMetadata"]["HTTPStatusCode"])
-
-    def verifying_email_and_user_are_available(self, user, currentcity, currentcountry, email, firstname, lastname,
-                                               password):
-        # this function first verfiys that the username and email are available to use
-        # if one or the other is not available we return false
-        # if available we call our put function that pushes items to db
-        if self.check_if_user_exists(user) and self.check_if_user_exists_email(email):
-            self.put(user, currentcity, currentcountry, email, firstname, lastname, password)
-            return True
-        else:
-            return False
-
-    def check_if_user_exists(self, username):
+    def username_availability(self, username):
         response = self.table.scan(
-            FilterExpression=Attr("Username").eq(username)
+            FilterExpression=Attr("username").eq(username)
         )
-        if response["Items"] == []:
-            return username
+        if response["Items"]:
+            return False
+        else:
+            return True
 
-    def check_if_user_exists_email(self, email):
+    def email_availability(self, email):
         response = self.table.scan(
             FilterExpression=Attr("email").eq(email)
         )
-        if response["Items"] == []:
-            return email
+        if response["Items"]:
+            return False
+        else:
+            return True
+    
+    def verification(self, username, currentcity, currentcountry, email, firstname, lastname,
+                                               password):
+        if self.username_availability(username) and self.email_availability(email):
+
+            self.put(username, currentcity, currentcountry, email, firstname, lastname, password)
+            return {
+                    "Result": True,
+                    "Error": None
+                    }
+        else:
+            return {
+                    "Result": False,
+                    "Error": "Username or email already exists"
+                    }
 
     def hash_pw(self, password):
         hashed = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
@@ -122,31 +127,53 @@ class Users:
                 "Country": None
             }
 
-    def delete_user(self, user):
-        # checking if user exists
-        response = self.table.scan(
-            FilterExpression=Attr("username").eq(user)
-        )
+    # def delete_user(self, user):
+    #     # checking if user exists
+    #     response = self.table.scan(
+    #         FilterExpression=Attr("username").eq(user)
+    #     )
        
-        
-        if len(response["Items"]) > 0:
+    #     if len(response["Items"]) > 0:
+    #         res = self.table.delete_item(
+    #             Key={
+    #                 self.Primary_Column_Name:user
+    #             }
+    #         )
+    #         return{
+    #              "Result": True,
+    #              "Error": None,
+    #              "description": "user was deleted"
+
+    #         }
+    #     else:
+    #         # print("user cannot be deleted")
+    #         return{
+    #              "Result": False,
+    #              "Error": "user doesnt not exists in data base"
+    #             }
+
+    def delete_account(self, username):
+        response = self.table.scan(
+            FilterExpression=Attr("username").eq(username)
+        )
+        if response["Items"]:
+            self.Primary_key = response["Items"][0]["username"]
             res = self.table.delete_item(
                 Key={
-                    self.Primary_Column_Name:user
+                    self.Primary_Column_Name: self.Primary_key
                 }
             )
-            return{
-                 "Result": True,
-                 "Error": None,
-                 "description": "user was deleted"
-
+            return {
+                "Result": True,
+                "Error": None,
+                "Description": "Username was deleted"
             }
         else:
-            # print("user cannot be deleted")
-            return{
-                 "Result": False,
-                 "Error": "user doesnt not exists in data base"
-                }
+            return {
+                "Result": False,
+                "Error": "Username does not exists",
+                "Description": "Error"
+            }
 
 
     def update_user(self, user, currentcity, currentcountry, firstname, lastname, email, password):

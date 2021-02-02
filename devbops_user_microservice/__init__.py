@@ -17,18 +17,9 @@ def signup():
     currentcity = res["City"]
     currentcountry = res["Country"]
 
-    if user.verifying_email_and_user_are_available(user=username, currentcity=currentcity, currentcountry=currentcountry, email=email, firstname=firstname, lastname=lastname,
-                                                   password=password):
-
-        return {
-            "Result": True,
-            "Error": None
-        }
-    else:
-        return {
-            "Result": False,
-            "Error": "Username or email is already taken"
-        }
+    reg = user.verification(username=username, currentcity=currentcity, currentcountry=currentcountry, email=email, firstname=firstname, lastname=lastname,
+                                                   password=password)
+    return reg
 
 
 @app.route("/login", methods=['POST'])
@@ -45,7 +36,7 @@ def login():
 def delete():
     res = request.json
     username = res["Username"]
-    deleted = user.delete_user(user=username)
+    deleted = user.delete_account(username=username)
     return deleted
 
 

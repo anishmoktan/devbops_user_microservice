@@ -14,6 +14,15 @@ class BasicTestCase(unittest.TestCase):
         self.app = app.test_client()
         self.assertEqual(app.debug, False)
 
+    def test_0_delete_(self):
+
+        req = {
+            "Username":"DevBops_Admin"
+        }
+        rv = self.app.post('/delete', json=req)
+        data = json.loads(rv.data)
+        assert data['Result'] == False
+
     def test_1_signup(self):
         req = {
             "Action":"register",
@@ -30,8 +39,24 @@ class BasicTestCase(unittest.TestCase):
         data = json.loads(rv.data)
         assert data['Result'] == True
 
+    def test_2_Signup_Second(self):
+        req = {
+            "Action":"register",
+            "Username":"QA_Tester_Dec",
+            "Password":"password12345678",
+            "Email":"QA@gmail.com",
+            "FirstName":"Quality",
+            "LastName":"Assurance",
+            "Country":"USA",
+            "City":"New York City"
+        }
 
-    def test_2_login(self):
+        rv = self.app.post('/register', json=req)
+        data = json.loads(rv.data)
+        assert data['Result'] == False
+
+
+    def test_3_login(self):
 
         req = {
             "Username":"QA_Tester_Dec",
@@ -42,7 +67,7 @@ class BasicTestCase(unittest.TestCase):
         assert data['Result'] == True
 
 
-    def test_3_update_info(self):
+    def test_4_update_info(self):
 
         req = {
             "Username":"QA_Tester_Dec",
@@ -59,7 +84,7 @@ class BasicTestCase(unittest.TestCase):
         assert data['Result'] == True
 
 
-    def test_4_delete(self):
+    def test_5_delete(self):
 
         req = {
             "Username":"QA_Tester_Dec"
