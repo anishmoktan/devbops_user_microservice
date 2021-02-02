@@ -52,15 +52,15 @@ class Users:
         if self.username_availability(username): # and self.email_availability(email):
 
             self.put(username, currentcity, currentcountry, email, firstname, lastname, password)
-            # return {
-            #         "Result": True,
-            #         "Error": None
-            #         }
+            return {
+                    "Result": True,
+                    "Error": None
+                    }
         else:
-            # return {
-            #         "Result": False,
-            #         "Error": "Username or email already exists"
-            #         }
+            return {
+                    "Result": False,
+                    "Error": "Username or email already exists"
+                    }
 
     def hash_pw(self, password):
         hashed = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
