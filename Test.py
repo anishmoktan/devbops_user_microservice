@@ -87,7 +87,6 @@ class BasicTestCase(unittest.TestCase):
 
 
     def test_5_delete(self):
-
         req = {
             "Username":"QA_Tester_Dec"
         }
