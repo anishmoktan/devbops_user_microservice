@@ -33,23 +33,23 @@ class Users:
         response = self.table.scan(
             FilterExpression=Attr("username").eq(username)
         )
-        if response["Items"]:
-            return False
-        else:
+        if response["Items"]== []:
             return True
+        else:
+            return False
 
-    def email_availability(self, email):
-        response = self.table.scan(
-            FilterExpression=Attr("email").eq(email)
-        )
-        if response["Items"]:
-            return False
-        else:
-            return True
+    # def email_availability(self, email):
+    #     response = self.table.scan(
+    #         FilterExpression=Attr("email").eq(email)
+    #     )
+    #     if response["Items"]:
+    #         return False
+    #     else:
+    #         return True
     
     def verification(self, username, currentcity, currentcountry, email, firstname, lastname,
                                                password):
-        if self.username_availability(username) and self.email_availability(email):
+        if self.username_availability(username): # and self.email_availability(email):
 
             self.put(username, currentcity, currentcountry, email, firstname, lastname, password)
             return {

@@ -37,6 +37,7 @@ class BasicTestCase(unittest.TestCase):
 
         rv = self.app.post('/register', json=req)
         data = json.loads(rv.data)
+        print(data)
         assert data['Result'] == True
 
     def test_2_Signup_Second(self):
@@ -44,7 +45,7 @@ class BasicTestCase(unittest.TestCase):
             "Action":"register",
             "Username":"QA_Tester_Dec",
             "Password":"password12345678",
-            "Email":"QA@gmail.com",
+            "Email":"QA1@gmail.com",
             "FirstName":"Quality",
             "LastName":"Assurance",
             "Country":"USA",
@@ -53,6 +54,7 @@ class BasicTestCase(unittest.TestCase):
 
         rv = self.app.post('/register', json=req)
         data = json.loads(rv.data)
+        print(data)
         assert data['Result'] == False
 
 
