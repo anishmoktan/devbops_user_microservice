@@ -99,7 +99,6 @@ class BasicTestCase(unittest.TestCase):
     #     response = tester.get('/', content_type='html/text')
     #     self.assertEqual(response.status_code, 302)
 
-    
-    
+      
 if __name__ == '__main__':
     unittest.main()
