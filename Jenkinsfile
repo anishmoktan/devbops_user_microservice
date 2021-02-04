@@ -64,7 +64,7 @@ node {
             } 
     }
 
-    stage('Run Docker conatiners on Private EC2'){
+    stage('Run Docker Containers in Private EC2'){
         // def priorV = (env.BUILD_NUMBER - 1)
         def dockerRm = 'docker rm -f devbops_user'
         def dockerPrune = 'docker image prune -a -f'
