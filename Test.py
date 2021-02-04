@@ -21,7 +21,7 @@ class BasicTestCase(unittest.TestCase):
         }
         rv = self.app.post('/delete', json=req)
         data = json.loads(rv.data)
-        assert data['Result'] == False]
+        assert data['Result'] == False
 
     def test_1_signup(self):
         req = {
